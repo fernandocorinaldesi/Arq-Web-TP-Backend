@@ -1,0 +1,236 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "Microondas-api",
+    "description": "Esta api fue creada para ser utilizada como diseño base",
+    "license": {
+      "name": "",
+      "url": ""
+    }
+  },
+  "host": "localhost:3002",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Publicaciones"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Register": {
+      "post": {
+        "summary": "Crear un nuevo usuario en la api",
+        "parameters": [
+          {
+            "name": "Usuario",
+            "in": "body",
+            "description": "Datos de usuario",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Un nuevo usuario fue creado",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      }
+    },
+    "/Login": {
+      "post": {
+        "summary": "Autenticarse como usuario en la api",
+        "parameters": [
+          {
+            "name": "Usuario",
+            "in": "body",
+            "description": "Datos de usuario",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "La autenticación fue exitosa",
+            "schema": {
+              "$ref": "#/definitions/Usuario"
+            }
+          }
+        }
+      }
+    },
+    "/publicaciones": {
+      "post": {
+        "summary": "Crea una publicación",
+        "tags": [
+          "Publicaciones"
+        ],
+        "description": "Crear una nueva publicación en la api",
+        "parameters": [
+          {
+            "name": "publicacion",
+            "in": "body",
+            "description": "Datos de la publicación",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Una nueva publicación fue creada",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Publicaciones"
+        ],
+        "summary": "Obtener todas las publicaciones de la api",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        }
+      }
+    },
+    "/publicaciones/{publicacionId}": {
+      "parameters": [
+        {
+          "name": "publicacionId",
+          "in": "path",
+          "required": true,
+          "description": "ID de la publicación a buscar",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Publicaciones"
+        ],
+        "summary": "Obtener una publicación con el ID",
+        "responses": {
+          "200": {
+            "description": "La publicacion fue encontrada",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Borra una publicación con el ID",
+        "tags": [
+          "Publicaciones"
+        ],
+        "responses": {
+          "200": {
+            "description": "La publicación fue eliminada",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Actualizar una publicación con el ID",
+        "tags": [
+          "Publicaciones"
+        ],
+        "parameters": [
+          {
+            "name": "publicacionId",
+            "in": "body",
+            "description": "Publicación con nuevos valores",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "La publicación fue actualizada",
+            "schema": {
+              "$ref": "#/definitions/Publicacion"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Publicacion": {
+      "required": [
+        "titulo",
+        "contenido",
+        "imagen",
+        "usuario"
+      ],
+      "properties": {
+        "titulo": {
+          "type": "string"
+        },
+        "contenido": {
+          "type": "string"
+        },
+        "imagen": {
+          "type": "File jpg/png/bmp"
+        },
+        "usuario": {
+          "type": "string"
+        }
+      }
+    },
+    "Usuario": {
+      "required": [
+        "email",
+        "userName",
+        "password",
+        "confirmarPassword"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "confirmarPassword": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
