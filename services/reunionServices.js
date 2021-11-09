@@ -33,6 +33,5 @@ exports.edit = async (body, id) => {
 
 exports.delete = async (reunion) => {
   const res = await reunion.destroy()
-  console.log("RES "+res)
   return res
  };

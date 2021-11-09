@@ -1,10 +1,8 @@
 const reunionServices = require("../services/reunionServices")
 
 exports.getAll = async (req, res, next) => {
-
   try {
     const resultado = await reunionServices.getAllReuniones()
-
     res.status(200).json({
       mensaje: "Elementos encontrados",
       elementos: resultado,
@@ -19,13 +17,11 @@ exports.getAll = async (req, res, next) => {
 
 }
 exports.addReunion = async (req, res, next) => {
-  console.log("ESTOY HACIENDO UN POST")
-  console.log(req.body)
   try {
     const resultado = await reunionServices.add(req.body)
 
     res.status(201).json({
-      mensaje: "El servicio fue creado correctamente",
+      mensaje: "Una reunion fue creada correctamente",
       elementos: resultado
     })
 
@@ -49,7 +45,6 @@ exports.findById = async (req, res, next) => {
 }
 
 exports.editReunion = async (req, res, next) => {
-  console.log("ESTOY EDITANDO")
   const id = req.params.id
   console.log(req.body)
 
@@ -58,7 +53,7 @@ exports.editReunion = async (req, res, next) => {
     const servicio = await reunionServices.getReunionById(id)
     const resultado = await reunionServices.edit(req.body,servicio.id)
     res.status(200).json({
-      mensaje: "El servicio fue editado correctamente",
+      mensaje: "La reunion fue editada correctamente",
       elementos: resultado,
     })
 
@@ -70,15 +65,12 @@ exports.editReunion = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
   const id = req.params.id
-  console.log("A ELIMINAR ES EL ID"+id)
 
   try {
     const resultado = await reunionServices.getReunionById(id);
-    console.log("RESULTADO "+resultado)
-    
     const resultadoDeleted = await reunionServices.delete(resultado)
       res.status(200).json({
-          mensaje: 'Servicio eliminada.',
+          mensaje: 'Reunion eliminada.',
           resultado: resultadoDeleted
       })
   } catch (error) {
